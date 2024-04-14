@@ -1,0 +1,7 @@
+To be determined is the best way pass information via the API.
+
+Initaly we will target being able to generate / load static files.
+
+ie. Create an erro file when you would return an error.
+When loading on the fron end, assume that you got the good data flag (or similar notion)
+

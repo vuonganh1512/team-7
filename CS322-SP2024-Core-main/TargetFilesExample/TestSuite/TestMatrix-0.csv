@@ -1,0 +1,12 @@
+Test,Constraints,Property,1,2,3,4,5,6,7,8,9,10
+F1,None,(1)*{A}[T] + (-1)*{B}[T] + (3)*{X1}[T] + (3)*{M}[T] + (1)*{CO}[T]  == (1)*{A}[T] + (-1)*{B}[T] + (3)*{X1}[T] + (3)*{M}[T] + (1)*{CO}[T] ,true,true,true,true,true,true,true,true,true,true
+F2,None,(1)*{H}[T] + (2)*{D}[T] + (2)*{Y}[T] + (1)*{X1}[T] + (-2)*{CO}[T]  == (1)*{H}[T] + (2)*{D}[T] + (2)*{Y}[T] + (1)*{X1}[T] + (-2)*{CO}[T] ,true,true,true,true,true,true,true,true,true,true
+F3,None,(1)*{CE}[T] + (-1)*{Y}[T] + (1)*{CO}[T]  == (1)*{CE}[T] + (-1)*{Y}[T] + (1)*{CO}[T] ,true,true,true,true,true,true,true,true,true,true
+I4,None,(2)*{Reaction7}[T] + (1)*{B}[T] + (3)*{X1}[T] + (3)*{M}[T]  == (2)*{Reaction7}[T] + (1)*{B}[T] + (3)*{X1}[T] + (3)*{M}[T] ,true,true,true,true,true,true,true,true,true,true
+I5,None,(1)*{Reaction5}[T] + (-1)*{D}[T] + (-1)*{Y}[T] + (1)*{CO}[T]  == (1)*{Reaction5}[T] + (-1)*{D}[T] + (-1)*{Y}[T] + (1)*{CO}[T] ,true,true,true,true,true,true,true,true,true,true
+I6,None,(1)*{Reaction1}[T] + (1)*{X1}[T]  == (1)*{Reaction1}[T] + (1)*{X1}[T] ,true,true,true,true,true,true,true,true,true,true
+I7,None,(2)*{Reaction2}[T] + (1)*{PO}[T] + (1)*{X1}[T]  == (2)*{Reaction2}[T] + (1)*{PO}[T] + (1)*{X1}[T] ,true,true,true,true,true,true,true,true,true,true
+I8,None,(2)*{Reaction3}[T] + (2)*{Reaction4}[T] + (1)*{PO}[T] + (1)*{X1}[T] + (2)*{PE}[T]  == (2)*{Reaction3}[T] + (2)*{Reaction4}[T] + (1)*{PO}[T] + (1)*{X1}[T] + (2)*{PE}[T] ,true,true,true,true,true,true,true,true,true,true
+I9,None,(1)*{Reaction6}[T] + (1)*{X1}[T] + (1)*{M}[T]  == (1)*{Reaction6}[T] + (1)*{X1}[T] + (1)*{M}[T] ,true,true,true,true,true,true,true,true,true,true
+R10,None,(1)*{Reaction10}[T] + (-1)*{Reaction8}[T] + (1)*{Y}[T] + (-1)*{CO}[T]  == (1)*{Reaction10}[T] + (-1)*{Reaction8}[T] + (1)*{Y}[T] + (-1)*{CO}[T] ,true,true,true,true,true,true,true,true,true,true
+R11,None,(1)*{Reaction11}[T] + (-1)*{Reaction9}[T] + (1)*{CO}[T]  == (1)*{Reaction11}[T] + (-1)*{Reaction9}[T] + (1)*{CO}[T] ,true,true,true,true,true,true,true,true,true,true
