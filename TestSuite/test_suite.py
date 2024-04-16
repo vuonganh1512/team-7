@@ -5,10 +5,11 @@ import os
 
 def main(argv):
   #Printing the file name and input_matrix
-  input_matrix = pd.read_csv('TestSuite/InputMatrix.csv')
+  trace_file1 = pd.read_csv('CS322-SP2024-Core-main/FullSampleTestANDTrace/101.csv')
+  main_TFile = df(trace_file1)
+  
   print(os.getcwd())
-  print(input_matrix)
-
+  print(main_TFile)
 
 
 
