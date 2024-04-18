@@ -24,3 +24,10 @@ This file contains the formulas for the reactions that we want to test. Each lin
 These are the files that are primarily evaluated. Once an Input and Test are selected, the program will evaluate these traces to see if they pass
 * Trace files are named after the Input ID's in the InputMatrix
 * These files are named similarly to the input id numbers corrseponding to those in theoInputMatrix.csv
+
+
+# Class documentation
+### class MatrixParser
+```from MatrixParser import MatrixParser```
+* Accepts a trace file as a Pandas Dataframe
+* parse(T, Z) evaluates the expression at times T and Z, and returns a boolean result
