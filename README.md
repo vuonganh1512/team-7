@@ -25,9 +25,21 @@ These are the files that are primarily evaluated. Once an Input and Test are sel
 * Trace files are named after the Input ID's in the InputMatrix
 * These files are named similarly to the input id numbers corrseponding to those in theoInputMatrix.csv
 
+### Custom Python module structure
+* A directory containing an __init__.py, and .py files with your custom code. For example,
+#### __init__.py:
+```
+import MatrixParser
+MatrixParser = MatrixParser.MatrixParser
+```
+Now you can import class MatrixParser from your .py file using:
+```
+from MatrixParser.MatrixParser import MatrixParser
+```
+
 
 # Class documentation
 ### class MatrixParser
-```from MatrixParser import MatrixParser```
+```from MatrixParser.MatrixParser import MatrixParser```
 * Accepts a trace file as a Pandas Dataframe
 * parse(T, Z) evaluates the expression at times T and Z, and returns a boolean result
