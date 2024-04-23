@@ -10,13 +10,16 @@ from MatrixParser.MatrixParser import MatrixParser
 def main(argv):
   #print(os.getcwd())
   #print(os.listdir('.'))
-  input_matrix = pd.read_csv('InputMatrix.csv') # Based on the formulas at time t in the input matrix
-  trace_file = pd.read_csv('1.csv') # IDs correspond to the input ids of InputMatrix Evaluate upon the trace file
-  test_matrix = pd.read_csv('TestMatrix.csv') # Both T and Z are given by 
+  test_input = input("Test: ")
+  trace_input = input("InputID: ")
+
+  input_matrix = pd.read_csv('TestSuite/InputMatrix.csv') # Based on the formulas at time t in the input matrix
+  trace_file = pd.read_csv('TestSuite/' + trace_input + '.csv') # IDs correspond to the input ids of InputMatrix Evaluate upon the trace file
+  test_matrix = pd.read_csv('TestSuite/TestMatrix.csv') # Both T and Z are given by 
   
   #print(test_matrix[test_matrix.TestName == "ASE1"].Property.iloc[0])
 
-  prop = test_matrix[test_matrix.TestName == "ASE7"].Property.iloc[0]
+  prop = test_matrix[test_matrix.TestName == test_input].Property.iloc[0]
   mparser = MatrixParser(tracedf = trace_file)
   r = mparser.parse(property = prop, T = 1.4, Z = 2.5)
   print("Parse result: " + str(r))
