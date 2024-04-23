@@ -8,6 +8,8 @@ class MatrixParser:
     self.tracedf = dataframe
 
 
+  
+
   # Calculates a boolean truth of the property for the trace data given at times T and Z.
   # Assumes that the "T" expression is always on the left side of the operator, and the "Z" expression is always
   # on the right side.

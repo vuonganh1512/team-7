@@ -5,15 +5,33 @@ import pandas as pd
 import sys
 import os
 
+from MatrixParser.MatrixParser import MatrixParser
+
 def main(argv):
-  print(os.getcwd())
-  print(os.listdir('.'))
+  #print(os.getcwd())
+  #print(os.listdir('.'))
   input_matrix = pd.read_csv('InputMatrix.csv') # Based on the formulas at time t in the input matrix
   trace_file = pd.read_csv('1.csv') # IDs correspond to the input ids of InputMatrix Evaluate upon the trace file
   test_matrix = pd.read_csv('TestMatrix.csv') # Both T and Z are given by 
-  print(input_matrix)
+  
+  #print(test_matrix[test_matrix.TestName == "ASE1"].Property.iloc[0])
 
-  print(trace_file)
+  prop = test_matrix[test_matrix.TestName == "ASE7"].Property.iloc[0]
+  mparser = MatrixParser(tracedf = trace_file)
+  r = mparser.parse(property = prop, T = 1.4, Z = 2.5)
+  print("Parse result: " + str(r))
+  #print(trace_file.iloc[[4]].to_dict(orient='records')[0]) # https://stackoverflow.com/a/31324373
+  #prop = test_matrix[test_matrix.TestName == "ASE7"].Property
+  #prop = str(prop[0])
+  #print(prop)
+  #expr = prop.replace('{','(').replace('}',')')
+  #print(expr)
+  
+  #print(r)
+  #print(prop)
+  #print(input_matrix)
+
+  #print(trace_file)
 
 
 if __name__ == "__main__":
