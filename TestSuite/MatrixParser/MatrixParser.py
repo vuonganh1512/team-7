@@ -26,11 +26,16 @@ class MatrixParser:
     Tdict = Tdata.to_dict(orient='records')[0] # https://stackoverflow.com/a/31324373
     Zdict = Zdata.to_dict(orient='records')[0]
 
-    # Find all the variable expressions, including their names and indexing variables
-    allvars = set(re.finditer(r'{([A-Za-z0-9|]+)}\[([A-Za-z0-9|])+\]', property))
-    vars_dict = {} # The scope dictionary for the variables
+    ### Find all the variable expressions, including their names and indexing variables
+    vars_dict = {} # The scope dictionary for the variables, which we will fill with random variable names to their values
+    
+    # Create a dictionary of the entire match, mapped to the match object. This is only done to create a proper set
+    # of the matches, without duplicates
+    match_dict = {match.group(0): match for match in re.finditer(r'{([A-Za-z0-9|]+)}\[([A-Za-z0-9|])+\]', property)}
+    
     # Iteratively replace each kind in the string with a random name, adding this and the actual value of the variable to the dictionary
-    for match in allvars:
+    for fullmatch in set(match_dict.keys()):
+      match = match_dict[fullmatch]
       # Note: match.group(0) is the entire match
       variable_name = match.group(1)
       indexing_variable = match.group(2)
