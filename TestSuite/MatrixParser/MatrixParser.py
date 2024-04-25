@@ -1,4 +1,7 @@
 import re
+import math
+import string
+import random
 
 class MatrixParser:
   def __init__(self, tracedf):
@@ -23,24 +26,27 @@ class MatrixParser:
     Tdict = Tdata.to_dict(orient='records')[0] # https://stackoverflow.com/a/31324373
     Zdict = Zdata.to_dict(orient='records')[0]
 
-    # Find the operator in the property string
-    op = re.search(r'([<>]|==)', property)
-    if op is None:
-      raise Exception("No valid operator was present in the property string!")
-    op = op.group(0)
-    
-    # Find expressions on either side of the operator
-    Texpr, Zexpr = tuple(property.split(op))
-    
-    # Clean the expressions, by replacing "{SOMEVAR}[T]" with just "SOMEVAR"
-    Texpr = re.sub(r'{([A-Za-z|]+)}\[[A-Za-z|]+\]', '\g<1>', Texpr)
-    Zexpr = re.sub(r'{([A-Za-z|]+)}\[[A-Za-z|]+\]', '\g<1>', Zexpr)
+    # Find all the variable expressions, including their names and indexing variables
+    allvars = set(re.finditer(r'{([A-Za-z0-9|]+)}\[([A-Za-z0-9|])+\]', property))
+    vars_dict = {} # The scope dictionary for the variables
+    # Iteratively replace each kind in the string with a random name, adding this and the actual value of the variable to the dictionary
+    for match in allvars:
+      # Note: match.group(0) is the entire match
+      variable_name = match.group(1)
+      indexing_variable = match.group(2)
 
-    # Evaluate the T and Z parts of the expressions into numerical values,
-    # given all the other input variables that we retrieved earlier at times T and Z
-
-    Tresult = eval(Texpr, Tdict, Tdict)
-    Zresult = eval(Zexpr, Zdict, Zdict)
-
-    # Compare the resulting T and Z values with the operator we retrieved earlier
-    return eval(str(Tresult) + op + str(Zresult))
+      # https://stackoverflow.com/a/56398787
+      alphabet = string.ascii_lowercase + string.ascii_uppercase
+      random_name = ''.join(random.choices(alphabet, k=8))  # variable_name + "_" + # Some actual variable names may not be allowed variable names?
+      property = property.replace(match.group(0), random_name)
+      
+      # Add to scope dictionary
+      match indexing_variable:
+        case 'T':
+          vars_dict[random_name] = Tdata[variable_name].values[0] # .values[0]: A Series object with one item is returned, so get this value
+        case 'Z':
+          vars_dict[random_name] = Zdata[variable_name].values[0]
+        case _:
+          raise KeyError(f"No such indexing variable '{indexing_variable}' is supported!")
+        
+    return eval(property, vars_dict, vars_dict)
