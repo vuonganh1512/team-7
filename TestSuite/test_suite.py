@@ -21,11 +21,11 @@ def main(argv):
 
   prop = test_matrix[test_matrix.TestName == test_input].Property.iloc[0]
   mparser = MatrixParser(tracedf = trace_file)
-  r = mparser.parse(property = prop, T = 1.4, Z = 2.5)
+  r = mparser.parse(property = prop, T = 1.4, Z = 5.5)
   print("Parse result: " + str(r))
-  #print(trace_file.iloc[[4]].to_dict(orient='records')[0]) # https://stackoverflow.com/a/31324373
-  #prop = test_matrix[test_matrix.TestName == "ASE7"].Property
-  #prop = str(prop[0])
+  print(trace_file.iloc[[4]].to_dict(orient='records')[0]) # https://stackoverflow.com/a/31324373
+  prop = test_matrix[test_matrix.TestName == "ASE7"].Property
+  prop = str(prop[0])
   #print(prop)
   #expr = prop.replace('{','(').replace('}',')')
   #print(expr)
