@@ -32,10 +32,11 @@ def evaluate_property(numerical_columns, property_test):
     return True
 
 
-input_matrix = pd.read_csv('FullSampleTestANDTrace\TestMatrix.csv')
+input_matrix = pd.read_csv('TestSuite/TestMatrix.csv')
 
 test_results = process_test_cases(input_matrix)
 
 # Display results
 for test_name, passed in test_results:
     print(f"Test case '{test_name}': {'True' if passed else 'False'}")
+pd.read_parquet('1__101.parquet', engine='fastparquet')
