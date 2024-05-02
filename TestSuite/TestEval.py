@@ -2,15 +2,15 @@ import pandas as pd
 import numpy as np
 import re
 
-def __init__(self, testdf, inputdf):
-    self.testdf = testdf
-    self.inputdf = inputdf
+def __init__(self, tracedf):
+    self.tracedf = tracedf
 
 def setTraceData(self, dataframe):
     self.tracedf = dataframe
 
-def setTestData(self, dataframe):
-    self.tracedf = dataframe
+def eval(self, inputdf, testdf):
+    #Get row of test and column of input
+    Tedata = self.tracedf.iloc[[testdf]]
+    Trdata = self.tracedf.iloc[inputdf]
 
-def eval(self):
-    pass
+    #Use finditer?

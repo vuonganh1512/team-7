@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 import sys
 import os
+import TestEval
 
 from MatrixParser.MatrixParser import MatrixParser
 
@@ -16,6 +17,9 @@ def main(argv):
   input_matrix = pd.read_csv('TestSuite/InputMatrix.csv') # Based on the formulas at time t in the input matrix
   trace_file = pd.read_csv('TestSuite/' + trace_input + '.csv') # IDs correspond to the input ids of InputMatrix Evaluate upon the trace file
   test_matrix = pd.read_csv('TestSuite/TestMatrix.csv') # Both T and Z are given by 
+
+  if evaluate(trace_input, test_input) == "FALSE":
+    raise Exception("Not a valid test!")
   
   #print(test_matrix[test_matrix.TestName == "ASE1"].Property.iloc[0])
 
@@ -23,19 +27,27 @@ def main(argv):
   mparser = MatrixParser(tracedf = trace_file)
   r = mparser.parse(property = prop, T = 1.4, Z = 5.5)
   print("Parse result: " + str(r))
-  print(trace_file.iloc[[4]].to_dict(orient='records')[0]) # https://stackoverflow.com/a/31324373
-  prop = test_matrix[test_matrix.TestName == "ASE7"].Property
-  prop = str(prop[0])
+  #print(trace_file.iloc[[4]].to_dict(orient='records')[0]) # https://stackoverflow.com/a/31324373
+  #prop = test_matrix[test_matrix.TestName == "ASE7"].Property
+  #prop = str(prop[0])
   #print(prop)
   #expr = prop.replace('{','(').replace('}',')')
   #print(expr)
-  
+
   #print(r)
   #print(prop)
   #print(input_matrix)
 
   #print(trace_file)
 
+def evaluate(trace_input, test_input):
+  test_matrix = pd.read_csv('TestSuite/TestMatrix.csv')
+
+  #Get row of test
+  teData = test_matrix[test_matrix.TestName == test_input]
+  trIndex = teData[trace_input]
+
+  return trIndex.array[0]
 
 if __name__ == "__main__":
   main(sys.argv)
