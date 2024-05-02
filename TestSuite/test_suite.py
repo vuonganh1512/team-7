@@ -5,38 +5,38 @@ import pandas as pd
 import sys
 import os
 
-from MatrixParser.MatrixParser import MatrixParser
+def process_test_cases(data):
+    results = []
+    
+    # Iterate over each row in the data
+    for index, row in data.iterrows():
+        test_name = row['TestName']
+        constraints = row['Constraints']
+        property_test = row['Property']
+        
+       
+        numerical_columns = row[3:]
+        passed = evaluate_constraints(numerical_columns, constraints) and evaluate_property(numerical_columns, property_test)
+        
+        # Record the result of the test case
+        results.append((test_name, passed))
+    
+    return results
 
-def main(argv):
-  #print(os.getcwd())
-  #print(os.listdir('.'))
-  test_input = input("Test: ")
-  trace_input = input("InputID: ")
+def evaluate_constraints(numerical_columns, constraints):
+    
+    return True
 
-  input_matrix = pd.read_csv('TestSuite/InputMatrix.csv') # Based on the formulas at time t in the input matrix
-  trace_file = pd.read_csv('TestSuite/' + trace_input + '.csv') # IDs correspond to the input ids of InputMatrix Evaluate upon the trace file
-  test_matrix = pd.read_csv('TestSuite/TestMatrix.csv') # Both T and Z are given by 
-  
-  #print(test_matrix[test_matrix.TestName == "ASE1"].Property.iloc[0])
-
-  prop = test_matrix[test_matrix.TestName == test_input].Property.iloc[0]
-  mparser = MatrixParser(tracedf = trace_file)
-  r = mparser.parse(property = prop, T = 1.4, Z = 5.5)
-  print("Parse result: " + str(r))
-  print(trace_file.iloc[[4]].to_dict(orient='records')[0]) # https://stackoverflow.com/a/31324373
-  prop = test_matrix[test_matrix.TestName == "ASE7"].Property
-  prop = str(prop[0])
-  #print(prop)
-  #expr = prop.replace('{','(').replace('}',')')
-  #print(expr)
-  
-  #print(r)
-  #print(prop)
-  #print(input_matrix)
-
-  #print(trace_file)
+def evaluate_property(numerical_columns, property_test):
+    
+    return True
 
 
-if __name__ == "__main__":
-  main(sys.argv)
+input_matrix = pd.read_csv('TestSuite/TestMatrix.csv')
 
+test_results = process_test_cases(input_matrix)
+
+# Display results
+for test_name, passed in test_results:
+    print(f"Test case '{test_name}': {'True' if passed else 'False'}")
+pd.read_parquet('1__101.parquet', engine='fastparquet')
