@@ -48,23 +48,18 @@ These are the files that are primarily evaluated. Once an Input and Test are sel
 * Difference between AT/CT ... GE vs LE vs (none of these labels) files?
 * What are we supposed to do with the Concrete and Abstract tests?
 
-### How to define a custom Python module:
-Custom python modules are used in this project for the purpose of 
-* A directory containing an __init__.py, and .py files with your custom code. For example,
-#### __init__.py:
-```
-import MatrixParser
-MatrixParser = MatrixParser.MatrixParser
-```
-Now you can import class MatrixParser from your .py file using:
-```
-from MatrixParser.MatrixParser import MatrixParser
-```
+### Github Workflow
+The GitHub workflow is contained in .github/workflows/test_suite.yaml.
+* "run" lines specify a shell command to execute, such as running a test file
+* Any .yaml file in .github/workflows is elgible to run as a Github workflow upon every push
+
+### How to import an object from another Python file in the same directory:
+```from mypyfile.py import MyObject```
 
 
 # Class documentation
 ### class MatrixParser
-```from MatrixParser.MatrixParser import MatrixParser```
+```from MatrixParser import MatrixParser```
 * Accepts a trace file as a Pandas Dataframe
 * parse(T, Z) evaluates the expression at times T and Z, and returns a boolean result
 
