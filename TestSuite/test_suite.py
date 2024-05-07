@@ -4,51 +4,45 @@ import numpy as np
 import pandas as pd
 import sys
 import os
-import TestEval
+from OutputFormatter import update_results_dataframe
+from MatrixParser import MatrixParser
 
-from MatrixParser.MatrixParser import MatrixParser
+# Currently gets the path two levels above the test_suite.py
+global PROJECT_ROOT
+PROJECT_ROOT = os.path.realpath(__file__).split('/')[:-2]
+PROJECT_ROOT = '/'.join(PROJECT_ROOT)
+DATAFILES_PATH = PROJECT_ROOT + "/" + "DataFiles"
 
-def main(argv):
-  #print(os.getcwd())
-  #print(os.listdir('.'))
-  test_input = input("Test: ")
-  trace_input = input("InputID: ")
-
-  input_matrix = pd.read_csv('TestSuite/InputMatrix.csv') # Based on the formulas at time t in the input matrix
-  trace_file = pd.read_csv('TestSuite/' + trace_input + '.csv') # IDs correspond to the input ids of InputMatrix Evaluate upon the trace file
-  test_matrix = pd.read_csv('TestSuite/TestMatrix.csv') # Both T and Z are given by 
-
-  if evaluate(trace_input, test_input) == "FALSE":
-    raise Exception("Not a valid test!")
+def process_test_cases(data):
+  results = []
   
-  #print(test_matrix[test_matrix.TestName == "ASE1"].Property.iloc[0])
+  # Iterate over each row in the data
+  for index, row in data.iterrows():
+    test_name = row['TestName']
+    constraints = row['Constraints']
+    property_test = row['Property']
+    
+     
+    numerical_columns = row[3:]
+    passed = evaluate_constraints(numerical_columns, constraints) and evaluate_property(numerical_columns, property_test)
+    
+    # Record the result of the test case
+    results.append((test_name, passed))
+  
+  return results
 
-  prop = test_matrix[test_matrix.TestName == test_input].Property.iloc[0]
-  mparser = MatrixParser(tracedf = trace_file)
-  r = mparser.parse(property = prop, T = 1.4, Z = 5.5)
-  print("Parse result: " + str(r))
-  #print(trace_file.iloc[[4]].to_dict(orient='records')[0]) # https://stackoverflow.com/a/31324373
-  #prop = test_matrix[test_matrix.TestName == "ASE7"].Property
-  #prop = str(prop[0])
-  #print(prop)
-  #expr = prop.replace('{','(').replace('}',')')
-  #print(expr)
+def evaluate_constraints(numerical_columns, constraints):
+  return True
 
-  #print(r)
-  #print(prop)
-  #print(input_matrix)
+def evaluate_property(numerical_columns, property_test):
+  return True
 
-  #print(trace_file)
 
-def evaluate(trace_input, test_input):
-  test_matrix = pd.read_csv('TestSuite/TestMatrix.csv')
+test_matrix = pd.read_csv(f'{DATAFILES_PATH}/csv/TestMatrix/TestMatrix.csv')
 
-  #Get row of test
-  teData = test_matrix[test_matrix.TestName == test_input]
-  trIndex = teData[trace_input]
+test_results = process_test_cases(test_matrix)
 
-  return trIndex.array[0]
-
-if __name__ == "__main__":
-  main(sys.argv)
-
+# Display results
+for test_name, passed in test_results:
+  print(f"Test case '{test_name}': {'True' if passed else 'False'}")
+#pd.read_parquet('1__101.parquet', engine='fastparquet')

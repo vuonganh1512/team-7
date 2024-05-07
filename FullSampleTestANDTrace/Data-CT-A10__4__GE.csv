@@ -1,0 +1,2 @@
+Name,ConcreteInputName,AbstractTestName,EvaluationTime,EvaluationNames,Pass,Fail,Error,FlakeyFail,DeterministicPass,DeterministicFail,DeterministicError,Evaluation_Number,Evaluation_NumberPass,Evaluation_NumberFail,Evaluation_NumberError
+A10|4|GE,4,A10,MaxTime,{A10|4|Evaluation|001}{A10|4|Evaluation|002}{A10|4|Evaluation|003}{A10|4|Evaluation|004}{A10|4|Evaluation|005}{A10|4|Evaluation|006}{A10|4|Evaluation|007}{A10|4|Evaluation|008}{A10|4|Evaluation|009}{A10|4|Evaluation|010},0,1,0,0,0,1,0,20,0,20,0
