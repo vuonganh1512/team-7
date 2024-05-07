@@ -38,11 +38,11 @@ def evaluate_property(numerical_columns, property_test):
   return True
 
 
-input_matrix = pd.read_csv(f'{DATAFILES_PATH}/csv/InputMatrix/InputMatrix.csv')
+test_matrix = pd.read_csv(f'{DATAFILES_PATH}/csv/TestMatrix/TestMatrix.csv')
 
-test_results = process_test_cases(input_matrix)
+test_results = process_test_cases(test_matrix)
 
 # Display results
 for test_name, passed in test_results:
   print(f"Test case '{test_name}': {'True' if passed else 'False'}")
-pd.read_parquet('1__101.parquet', engine='fastparquet')
+#pd.read_parquet('1__101.parquet', engine='fastparquet')
